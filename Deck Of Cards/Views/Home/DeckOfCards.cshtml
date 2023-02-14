@@ -4,23 +4,29 @@
 *@
 @{
 }
-<form asp-method="post" asp-action="DeckOfCards">
-         
 
-    <input type="submit" />
-</form>
 
-<h1>These are your Cards</h1>
+<h1>Your Hand</h1>
 
-@{
-    foreach(Card c in Model.cards)
-    {
-        <p>@c.value</p>
-        <p>@c.suit</p>
+<form asp-action="DeckOfCards" asp-method="post">
+    @{
+        int i = 0;
+        foreach (Card c in Model.cards)
+        {
+            string name = $"card{i}";
+            i++;
+            <img src="@c.image"  />
+            <input type="checkbox" value="@c.image" name="@name"/>
 
-        <img src="@c.image" />
+        }
+
 
     }
-    
+    <br />
+    <input type ="submit" />
 
-}
+</form>
+
+<br />
+<a asp-action="Shuffle" class="btn" btn-primary>Draw 5 more </a>
+<a asp-action="Shuffle" class="btn" btn-primary>Reshuffle Early> </a>
